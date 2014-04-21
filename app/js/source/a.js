@@ -26,7 +26,18 @@
 
   function getColors() {
     var c = $('#color-list').val();
+    c = c.replace(/ /g, '');
     return c.split(',');
   }
 
 })();
+
+
+/*
+for(var i=0; i<len; i++) {
+  $div = $('<div>');
+  $div.css('background-color', colors[i]);
+  $div.text(colors[i].length);
+  $('#box').append($div);
+}
+*/
