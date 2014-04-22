@@ -18,18 +18,25 @@
 
   function startGame() {
     var playerIdx = randomNum();
+    var pelletIdx = randomNum();
+    while(playerIdx === pelletIdx) {
+      pelletIdx = randomNum();
+    }
     placeCard(playerIdx, 'player');
-    placeCard(randomNum(), 'pellet');
+    placeCard(pelletIdx, 'pellet');
+
+    $('#winner').text('');
+    $('#winner').css('background-color', 'white');
 
     currRow = Math.floor(playerIdx/numCols);
     currCol = playerIdx % numCols;
-    winCond();
   }
 
   function winCond() {
     if($('.player.pellet').length) {
-      alert('Yum!');
-      $('.player .pellet').removeClass('player pellet');
+      $('#winner').text('Yum!');
+      $('#winner').css('background-color', 'rgb(169, 201, 152)');
+      $('.pellet').removeClass('pellet');
     }
   }
 
