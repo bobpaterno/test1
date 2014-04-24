@@ -9,14 +9,18 @@ body {
 
 }
 
+.rect {
+  position: absolute;
+  background-color: rgb(200,230,200);
+  border: 2px solid black;
+  display: inline-block;
+}
+
 #big-box {
   width: 400px;
   height: 400px;
   text-align: center;
-  display: inline-block;
-  background-color: rgb(200,230,200);
-  border: 2px solid black;
-  position: absolute;
+  border-radius: 5%;
 }
 
 #small-box {
@@ -25,9 +29,11 @@ body {
   text-align: center;
   background-color: rgba(200,200,230,0.9);
   border: 2px solid black;
+  border-radius: 5%;
   position: absolute;
 }
 
-#rect {
-  z-index:2000;
+#btn-rect {
+  position: absolute;
+  z-index:1000;
 }

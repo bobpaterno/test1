@@ -2,16 +2,11 @@
   'use strict';
 
   $(document).ready(init);
-  var bbWid= 400;
-  var bbHt = 400;
-  var sbWid= 100;
-  var sbHt = 100;
+  var BOX_LIMIT = 0.3;
+
 
   function init() {
-    boxRand('#small-box', sbWid,sbHt,bbWid,bbHt);
-    boxRand('#big-box',bbWid,bbHt, window.innerWidth,window.innerHeight);
-    $('#big-box:not(#small-box)').click(selectBigBox);
-    $('#small-box').click(selectSmallBox);
+    $('#btn-rect').click(makeNewRect);
     $('body').keydown(moveSelectedBox);
   }
 
@@ -46,23 +41,33 @@
     }
   }
 
-  function selectBigBox() {
-    $('#small-box').removeClass('smallMove');
-    $('#big-box').addClass('bigMove');
+  function makeNewRect() {
+    var dim = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
+    boxRand(randSize(BOX_LIMIT*dim),randSize(BOX_LIMIT*dim),window.innerWidth, window.innerHeight);
   }
 
-  function selectSmallBox(event) {
-    $('#big-box').removeClass('bigMove');
-    $('#small-box').addClass('smallMove');
-    event.stopPropagation();
-  }
+  // function selectSmallBox(event) {
+  //   $('#big-box').removeClass('bigMove');
+  //   $('#small-box').addClass('smallMove');
+  //   event.stopPropagation();
+  // }
 
-  function boxRand(boxname, thisWid, thisHt, outerWid, outerHt) {
+  function boxRand(thisWid, thisHt, outerWid, outerHt) {
+    var div  = $('<div>');
     var left = Math.floor((outerWid-thisWid)*Math.random());
     var top  = Math.floor((outerHt-thisHt)*Math.random());
+debugger;
+    $(div).css('left', left);
+    $(div).css('top', top);
+    $(div).css('width', thisWid);
+    $(div).css('height', thisHt);
+    $(div).css('background-color', 'rgb('+randSize(255)+' ,'+randSize(255)+' ,'+randSize(255)+' )');
+    $(div).addClass('rect');
+    $('#boxes').append(div);
+  }
 
-    $(boxname).css('left', left);
-    $(boxname).css('top', top);
+  function randSize(max) {
+    return Math.floor( (max) * Math.random());
   }
 
 })();
